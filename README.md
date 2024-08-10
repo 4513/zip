@@ -1,2 +1,2 @@
-# zip
+# ZIP
 ZIP codes validation

@@ -1,0 +1,30 @@
+name: Vendor Check
+
+on:
+  push:
+    branches:
+      - "main"
+  schedule:
+    - cron: "0 1 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  standard:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+
+      - name: Composer Install
+        run: composer install
+
+      - name: Check new major versions of vendor libs
+        run: composer outdated
